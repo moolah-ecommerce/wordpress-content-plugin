@@ -1,0 +1,6 @@
+.monetize table, .monetize tr, .monetize td, .monetize div {
+	border: none;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	vertical-align: middle;
+}
