@@ -5,46 +5,26 @@
  * Plugin URI: http://moolah-ecommerce.com
  * Version: 2.0.0
  * Description: Moolah E-Commerce
- * Plugin Author: Toby Patterson
+ * Author: Moolah E-Commerce
+ * Author Email: dev@moolah-ecommerce.com
+ * Author URI: http://moolah-ecommerce.com
  */
 
 define('MOOLAH_VERSION', '2.0.0');
 
-// Call function when plugin is activated
-register_activation_hook(__FILE__, 'moolah_install');
 // Action hook to initialize the plugin
 add_action('admin_init', 'moolah_init');
 // Action hook to register our option settings
 add_action('admin_init', 'moolah_register_settings');
-// Action hook to add the post products menu item
-add_action('admin_menu', 'moolah_menu');
+
 // Action hook to save the meta box data when the post is saved
 add_action('save_post', 'moolah_save_meta_box');
 // Action hook to create the post products shortcode
 add_shortcode('moolah', 'moolah_shortcode');
-// Action hook to create plugin widget
-add_action('widgets_init', 'moolah_register_widgets');
 
-function moolah_install()
-{
-	// setup our default option values
-	$moolah_options_arr = array(
-	);
-
-	// save our default option values
-	update_option('moolah_options', $moolah_options_arr);
-}
-
-// create the post products sub-menu
-function moolah_menu()
-{
-	add_options_page(
-		__('Moolah Settings Page', 'moolah-plugin'),
-		__('Moolah', 'moolah-plugin'),
-		'administrator',
-		__FILE__,
-		'moolah_settings_page'
-	);
+// Require the administrative file
+if ( is_admin() ) {
+    require_once dirname( __FILE__ ) . '/admin.php';
 }
 
 function moolah_home($test=false)
@@ -73,25 +53,40 @@ function moolah_home($test=false)
 function moolah_init()
 {
 	// create our custom meta box
-	add_meta_box('moolah-meta', __('Post Product Information', 'moolah-plugin'), 'moolah_meta_box', 'post', 'side', 'default');
+	static $already;
+    if ( ! $already ) {
+        add_meta_box('moolah-meta', __('Moolah Store', 'moolah-plugin'), 'moolah_meta_box', 'post', 'side', 'default');
+        $already = true;
+    }
 }
 
-// create shortcode
+// Parse the shortcode
 function moolah_shortcode($atts, $content = null)
 {
 	global $post;
-    $return = '';
 
 	$category   = @ $atts['category'];
 	$product    = @ $atts['product'];
 	$store      = @ $atts['store'];
     $target     = @ $atts['target'];
+    $options    = get_option('moolah_options');
 
+    // Fetch the store ID
     if ( ! $store )
     {
-        $options    = get_option('moolah_options');
-        $store      = $options['store_id'];
-        $test       = $options['testing'];
+        $store      = $options['store'];
+        $test       = $options['test'];
+    }
+
+    // Perhaps a category was provided in the metadata ?
+    if ( ! $category ) {
+        $category = get_post_meta($post->ID, 'moolah_category', true);
+
+    }
+
+    // Perhaps a product was provided in the metadata ?
+    if ( ! $product ) {
+        $product = get_post_meta($post->ID, 'moolah_product', true);
     }
 
     // queue up admin ajax and styles
@@ -119,27 +114,18 @@ function moolah_meta_box($post, $box)
 {
 
 	// retrieve our custom meta box values
-	$moolah_category = get_post_meta($post->ID, 'moolah_category', true);
-	$moolah_product = get_post_meta($post->ID, 'moolah_product', true);
+    $categoryId = get_post_meta($post->ID, 'moolah_category', true);
+	$productId = get_post_meta($post->ID, 'moolah_product', true);
 
-	// display meta box form
-	echo '<table>';
-	echo '<tr>';
-	echo '<td>' . __('Category', 'moolah-plugin') . ':</td><td><input type="text" name="moolah_category" value="' . esc_attr($moolah_category) . '" ></td>';
-	echo '</tr><tr>';
-	echo '<td>' . __('Product', 'moolah-plugin') . ':</td><td><input type="text" name="moolah_product" value="' . esc_attr($moolah_product) . '" ></td>';
-	echo '</tr>';
-	// display the meta box shortcode legend section
-	echo '</table>';
-	?>
+    ?>
 <table>
 	<tr>
 		<td><?php echo  __('Category', 'moolah-plugin') ?></td>
-		<td><input type="text" name="moolah_category" value="<?php echo esc_attr($moolah_product) ?>"/></td>
+		<td><input type="text" name="moolah_category" value="<?php echo esc_attr($categoryId) ?>"/></td>
 	</tr>
 	<tr>
 		<td><?php echo  __('Product', 'moolah-plugin') ?></td>
-		<td><input type="text" name="moolah_product" value="<?php echo esc_attr($moolah_product) ?>"/></td>
+		<td><input type="text" name="moolah_product" value="<?php echo esc_attr($productId) ?>"/></td>
 	</tr>
 </table>
 <?php
@@ -153,49 +139,8 @@ function moolah_save_meta_box($post_id, $post=null)
 		return;
 	}
 	// process form data if $_POST is set
-	update_post_meta($post_id, 'moolah_category', esc_attr($_POST ['moolah_category']));
-	update_post_meta($post_id, 'moolah_product', esc_attr($_POST ['moolah_product']));
-}
-
-// register our widget
-function moolah_register_widgets()
-{
-	register_widget('moolah_widget');
-}
-
-// moolah_widget class
-class moolah_widget extends WP_Widget
-{
-	// process our new widget
-	function moolah_widget()
-	{
-		$widget_ops = array(
-			'classname' => 'moolah_widget',
-			'description' => __('Display Post Products', 'moolah-plugin')
-		);
-		$this->WP_Widget('moolah_widget', __('Post Products Widget', 'moolah-plugin'), $widget_ops);
-	}
-
-	// build our widget settings form
-	function form($instance)
-	{
-
-	}
-
-	// save our widget settings
-	function update($new_instance, $old_instance)
-	{
-		$instance = $old_instance;
-		$instance ['title'] = strip_tags(esc_attr($new_instance ['title']));
-		$instance ['number_products'] = intval($new_instance ['number_products']);
-		return $instance;
-	}
-
-	// display our widget
-	function widget($args, $instance)
-	{
-
-	}
+	update_post_meta($post_id, 'moolah_category', (int) esc_attr($_POST['moolah_category']));
+	update_post_meta($post_id, 'moolah_product', (int) esc_attr($_POST['moolah_product']));
 }
 
 function moolah_register_settings()
@@ -209,23 +154,31 @@ function moolah_settings_page()
 	// load our options array
 	$moolah_options = get_option('moolah_options');
 	// if the show inventory option exists the checkbox needs to be checked
-	$store_id = $moolah_options ['store_id'];
+	$store = $moolah_options ['store'];
+
+    $msg = 'Enter your Store ID below. If you do not have one, you can register for a free account at <a href="%s" title="Moolah E-Commerce" target="_blank">%s</a>.';
+    $site = 'http://moolah-ecommerce.com/sign-up';
+    $msg = sprintf(__($msg),$site,$site);
 	?>
 <div class="wrap">
-	<h2><?php _e('Moolah Options', 'moolah-plugin') ?></h2>
+    <div class="icon32 icon-settings" >&nbsp;</div>
 
-	<form method="post" action="options.php">
-		<?php settings_fields('moolah-settings-group'); ?>
-		<table class="form-table">
-			<tr valign="top">
-				<th scope="row"><?php _e('Store ID', 'moolah-plugin') ?></th>
-				<td><input type="text" name="moolah_options[store_id]" value="<?php echo $store_id ?>" size="32"/></td>
-			</tr>
-		</table>
-		<p class="submit">
-			<input type="submit" class="button-primary" value="<?php _e('Save Changes', 'moolah-plugin') ?>"/>
-		</p>
-	</form>
+    <h2><?php _e('Moolah E-Commerce', 'moolah-plugin') ?></h2>
+
+    <p><?php echo $msg ?></p>
+    <form method="post" action="options.php">
+        <?php settings_fields('moolah-settings-group'); ?>
+        <table class="form-table">
+            <tr valign="top">
+                <th scope="row"><?php _e('Store ID', 'moolah-plugin') ?></th>
+                <td><input type="text" name="moolah_options[store]" value="<?php echo $store ?>" size="32"/></td>
+            </tr>
+        </table>
+        <p class="submit">
+            <input type="submit" class="button-primary" value="<?php _e('Save Changes', 'moolah-plugin') ?>"/>
+        </p>
+    </form>
+
 </div>
 <?php
 }
@@ -239,8 +192,10 @@ function moolah_enqueue_scripts()
 	wp_enqueue_style('moolah-style');
 }
 
+/*
 add_action('wp_head', 'moolah_head');
 function moolah_head()
 {
 
 }
+*/
