@@ -18,7 +18,7 @@ The Moolah E-Commerce Plugin automates the loading of your Moolah store. Simply 
 
 == Installation ==
 
-Upload the Akismet plugin to your blog, Activate it, then enter your [Moolah Store ID](http://moolah-ecommerce.com/sign-up).
+Upload the Moolah plugin to your blog, Activate it, then enter your [Moolah Store ID](http://moolah-ecommerce.com/sign-up).  For testing, you can use the ID 2642953450.
 
 == Changelog ==
 
