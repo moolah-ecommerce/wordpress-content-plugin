@@ -81,7 +81,6 @@ function moolah_shortcode($atts, $content = null)
     // Perhaps a category was provided in the metadata ?
     if ( ! $category ) {
         $category = get_post_meta($post->ID, 'moolah_category', true);
-
     }
 
     // Perhaps a product was provided in the metadata ?
@@ -91,12 +90,6 @@ function moolah_shortcode($atts, $content = null)
 
     // queue up admin ajax and styles
     $m = 'http://' . moolah_home($test) . '/' . $store;
-    $l = $m . '/extjs/';
-    $c = $m . '/css';
-    $j = $m . '/js';
-    $version = MOOLAH_VERSION;
-
-
 
     if ( ! $target ) {
         $target     = 'moolah';
