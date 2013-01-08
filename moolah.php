@@ -95,7 +95,7 @@ function moolah_shortcode($atts, $content = null)
         $target     = 'moolah';
     }
 
-    $url    = sprintf('%s/js/load.js?category=%s&product=%s&target=%s', $m, $category, $product,$target);
+    $url    = sprintf('%s/js/load.js?category=%s&product=%s&target=%s&system=wordpress', $m, $category, $product,$target);
     $script = sprintf('<script type="text/javascript" src="%s" ></script>',$url);
     $return = sprintf("\n%s\n<div id=\"%s\"></div>\n", $script, $target);
 
