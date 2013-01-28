@@ -3,14 +3,12 @@
 /*
  * Plugin Name: Moolah
  * Plugin URI: http://moolah-ecommerce.com
- * Version: 2.0.0
+ * Version: 2.0.2
  * Description: Moolah E-Commerce
  * Author: Moolah E-Commerce
  * Author Email: dev@moolah-ecommerce.com
  * Author URI: http://moolah-ecommerce.com
  */
-
-define('MOOLAH_VERSION', '2.0.0');
 
 // Action hook to initialize the plugin
 add_action('admin_init', 'moolah_init');
@@ -76,6 +74,11 @@ function moolah_shortcode($atts, $content = null)
     {
         $store      = $options['store'];
         $test       = $options['test'];
+    }
+
+    // One final check
+    if ( ! $store ) {
+        return $content;
     }
 
     // Perhaps a category was provided in the metadata ?
@@ -148,10 +151,16 @@ function moolah_settings_page()
 	$moolah_options = get_option('moolah_options');
 	// if the show inventory option exists the checkbox needs to be checked
 	$store = $moolah_options ['store'];
+    if ( ! $store ) $store = 2642953450;
 
-    $msg = 'Enter your Store ID below. If you do not have one, you can register for a free account at <a href="%s" title="Moolah E-Commerce" target="_blank">%s</a>.';
-    $site = 'http://moolah-ecommerce.com/sign-up';
-    $msg = sprintf(__($msg),$site,$site);
+    $msg1   = __('Enter your Store ID below. If you do not have one, you can register for a free account at %s.');
+    $msg2   = __('In your WordPress post, simply insert the code <strong>[moolah]</strong> to load your store');
+    $anchor = '<a href="%s" title="Moolah E-Commerce" target="_blank">%s</a>';
+    $site   = 'http://moolah-ecommerce.com/sign-up';
+
+    $link   = sprintf($anchor,$site,$site);
+    $msg1   = sprintf($msg1,$link);
+    $msg    = sprintf('<p>%s</p><p>%s</p>',$msg1,$msg2);
 	?>
 <div class="wrap">
     <div class="icon32 icon-settings" >&nbsp;</div>
