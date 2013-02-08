@@ -3,7 +3,6 @@ Contributors: moolah
 Tags: ecommerce, checkout, products, services, commerce, store
 Requires at least: 3.0
 Tested up to: 3.5.1
-Stable tag: 2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -11,9 +10,13 @@ Moolah provides you a single-page checkout on any website.
 
 == Description ==
 
-Moolah offers an easy-to-use solution for individuals, professionals, and businesses selling goods and services online.
+Moolah offers an easy-to-use solution for individuals, professionals, and businesses selling premium goods and specialized services.
 
-The Moolah E-Commerce Plugin automates the loading of your Moolah store. Simply enter your Store ID with optional category and product IDs, and the plugin will load your store into your WordPress website.
+Features:
+* Single Page Checkout keeps the customer focused on completing the purchase
+* Checkout Steps loaded dynamically using AJAX
+* Mobile friendly Order Interface can be loaded into multiple sites simultaneously
+* Centralized Management Console let's you control everything from one location
 
 
 == Installation ==

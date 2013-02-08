@@ -22,26 +22,25 @@ add_shortcode('moolah', 'moolah_post');
 
 add_filter ('the_content', 'moolah_page');
 
-// Require the administrative file
+// Require the administrative file if we're an admin
 if ( is_admin() ) {
     require_once dirname( __FILE__ ) . '/admin.php';
 }
 
+// Test where should we make our API calls to
 function moolah_home($test=false)
 {
 	static $home;
 
 	if (!$home) {
-		$local = $_SERVER['HTTP_HOST'];
 
-        if ( $local == 'mec-demo' ) {
-            //$home = $test ? 'mec-test' : 'mec-store';
-            $home = 'mec-test';
-        } else
-        if ( $local == 'demo.moolah-ecommerce.com' ) {
-            $home = 'test.moolah-ecommerce.com';
+        $options = get_option('moolah_options');
+        $source  = $options['source'];
+
+        if ( $source == 'store' ) {
+            $home = 'store.moolah-ecommerce.com';
         } else {
-            $home = $test ? 'test.moolah-ecommerce.com' : 'store.moolah-ecommerce.com';
+            $home = (gethostname() == 'Nymph.local') ? 'mec-test' : 'test.moolah-ecommerce.com';
         }
 
 	}
@@ -49,7 +48,7 @@ function moolah_home($test=false)
 	return $home;
 }
 
-// create post meta box
+// Create post meta box
 function moolah_init()
 {
 	// create our custom meta box
@@ -60,6 +59,7 @@ function moolah_init()
     }
 }
 
+// Load Moolah in a page
 function moolah_page($content)
 {
     global $post;
@@ -80,14 +80,14 @@ function moolah_page($content)
     return moolah_embed($content,$attribs);
 }
 
+// Load Moolah in a post
 function moolah_post($attribs, $content = null) {
     return moolah_embed($content,$attribs);
 }
 
-// Parse the shortcode
+// Embed Moolah into the current content
 function moolah_embed($content, $atts)
 {
-
 
 	$category   = @ $atts['category'];
 	$product    = @ $atts['product'];
@@ -122,9 +122,8 @@ function moolah_embed($content, $atts)
 }
 
 
-
+// Load the style sheet
 add_action('wp_enqueue_scripts', 'moolah_enqueue_scripts');
-
 function moolah_enqueue_scripts()
 {
 	wp_register_style('moolah-style', plugins_url().'/moolah/moolah.css' );

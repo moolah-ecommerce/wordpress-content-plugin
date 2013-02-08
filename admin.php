@@ -84,6 +84,7 @@ function moolah_settings_page()
     // if the show inventory option exists the checkbox needs to be checked
     $store  = $moolah_options['store'];
     $open   = $moolah_options['open'];
+    $source = $moolah_options['source'];
 
     $site   = 'http://moolah-ecommerce.com/sign-up';
 
@@ -94,36 +95,7 @@ function moolah_settings_page()
     <h2><?php _e('Moolah E-Commerce', 'moolah-plugin') ?></h2>
     <?php
 
-    if ( ! $store ) {
-        //$store = 2642953450;
-        $anchor = '<a href="%s" title="Moolah E-Commerce" target="_blank">%s</a>';
-        $link   = sprintf($anchor,$site,$site);
-        $msg    = __('Enter your Store ID below. If you do not have one, you can register for a free account at %s.');
 
-        echo '<p>'.sprintf($msg,$link).'</p>';
-    }
-
-    ?>
-
-    <form method="post" action="options.php">
-        <?php settings_fields('moolah-settings-group'); ?>
-        <table class="form-table" style="width:440px;">
-            <tr valign="top">
-                <th scope="row"><?php _e('Store ID', 'moolah-plugin') ?></th>
-                <td><input type="text" name="moolah_options[store]" value="<?php echo $store ?>" size="12"/></td>
-                <td>
-                    <select name="moolah_options[open]" >
-                        <option value="window" <?php if ($open == 'window') echo 'selected="selected"' ?> ><?php echo __('New Window') ?></option>
-                        <option value="iframe" <?php if ($open == 'iframe') echo 'selected="selected"' ?> ><?php echo __('Current page') ?></option>
-                    </select>
-                </td>
-                <td class="submit"><input type="submit" class="button-primary" value="<?php _e('Save Changes', 'moolah-plugin') ?>"/></td>
-            </tr>
-        </table>
-    </form>
-
-</div>
-<?php
 
     if ( $store ) {
         $home = moolah_home();
@@ -135,8 +107,8 @@ function moolah_settings_page()
         } else {
             $openJs = "window.open('$openUrl','new_window'); return false";
             $openClass = 'button button-primary button-hero';
-            $openStyle = 'display:block; text-align:center; height:40px; width:200px; margin-left: 100px;';
-            $openText = __('View Your Store');
+            $openStyle = 'display:block; text-align:center; height:40px; width:240px; margin-left: 100px;';
+            $openText = __('Open Management Panel');
             $openHtml = sprintf('<p><a href="#" onclick="%s" class="%s" style="%s">%s</a></p>',$openJs,$openClass,$openStyle,$openText);
         }
 
@@ -146,6 +118,49 @@ function moolah_settings_page()
         echo "<br/>";
     }
 
-    echo __('In your WordPress post, simply insert the code <strong>[moolah]</strong> into the post to load your store.');
+    if ( ! $store ) {
+        //$store = 2642953450;
+        $anchor = '<a href="%s" title="Moolah E-Commerce" target="_blank">%s</a>';
+        $link   = sprintf($anchor,$site,$site);
+        $msg    = __('Enter your Store ID below. If you do not have one, you can register for a free account at %s.');
+
+        echo '<p>'.sprintf($msg,$link).'</p>';
+    } else {
+        echo __('In your WordPress post, insert the code <strong>[moolah]</strong> into the post to load your store. In a page, simply check the <strong>Show</strong> checkbox.');
+    }
+
+    ?>
+
+    <form method="post" action="options.php">
+        <?php settings_fields('moolah-settings-group'); ?>
+        <table class="form-table moolah-settings" style="width:500px;">
+            <tr>
+                <th><?php echo _('Store ID') ?></th>
+                <th><?php echo _('Management Panel') ?></th>
+                <th><?php echo _('Server to Use') ?></th>
+                <th>&nbsp;</th>
+            </tr>
+            <tr>
+                <td><input type="text" name="moolah_options[store]" value="<?php echo $store ?>" size="12"/></td>
+                <td>
+                    <select name="moolah_options[open]" >
+                        <option value="window" <?php if ($open == 'window') echo 'selected="selected"' ?> ><?php echo __('New Window') ?></option>
+                        <option value="iframe" <?php if ($open == 'iframe') echo 'selected="selected"' ?> ><?php echo __('Current page') ?></option>
+                    </select>
+                </td>
+                <td>
+                    <select name="moolah_options[source]" >
+                        <option value="test" <?php if ($source == 'test') echo 'selected="selected"' ?> ><?php echo __('Test Server') ?></option>
+                        <option value="store" <?php if ($source == 'store') echo 'selected="selected"' ?> ><?php echo __('Store Server') ?></option>
+                    </select>
+                </td>
+                <td class="submit"><input type="submit" class="button-primary" value="<?php _e('Save Changes', 'moolah-plugin') ?>"/></td>
+            </tr>
+        </table>
+    </form>
+
+</div>
+<?php
+
 
 }
