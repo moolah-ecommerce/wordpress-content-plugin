@@ -3,7 +3,7 @@ Contributors: moolah
 Tags: ecommerce, checkout, products, services, commerce, store
 Requires at least: 3.0
 Tested up to: 3.5.1
-Stable tag: 2.0.1
+Stable tag: 2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,7 +18,7 @@ The Moolah E-Commerce Plugin automates the loading of your Moolah store. Simply 
 
 == Installation ==
 
-Upload the Moolah plugin to your blog, activate it, then enter your [Moolah Store ID](http://moolah-ecommerce.com/sign-up).
+Upload the Moolah plugin to your blog, activate it, then enter your Moolah Store ID.  Very simple.  You find all the information you need, and more, at http://moolah-ecommerce.com/learn/deploy/49-creating-a-wordpress-commerce-site .
 
 == Screenshots ==
 
@@ -29,10 +29,17 @@ Upload the Moolah plugin to your blog, activate it, then enter your [Moolah Stor
 
 == Changelog ==
 
-= 2.0.0 =
+= 2.1.0 =
 
-Initial Release of the Integration Plugin for Moolah 2.0.
+Added the ability to load the management panel via an iframe or a new window.
+Improved the loading of the order interface in both a post and page.
 
 = 2.0.1 =
 
 Updating the Settings Page to provide more helpful instructions.
+
+= 2.0.0 =
+
+Initial Release of the Integration Plugin for Moolah 2.0.
+
+
