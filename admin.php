@@ -92,7 +92,7 @@ function moolah_settings_page()
 <div class="wrap">
     <div class="icon32 icon-settings" >&nbsp;</div>
 
-    <h2><?php _e('Moolah E-Commerce', 'moolah-plugin') ?></h2>
+    <h2><?php _e('E-Commerce Store', 'moolah-plugin') ?></h2>
     <?php
 
 
