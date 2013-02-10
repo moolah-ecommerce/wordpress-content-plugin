@@ -118,7 +118,7 @@ function moolah_embed($content, $atts)
     $script = sprintf('<script type="text/javascript" src="%s" ></script>',$url);
     $return = sprintf("\n%s\n<div id=\"%s\"></div>\n", $script, $target);
 
-    return $return;
+    return $content.$return;
 }
 
 
