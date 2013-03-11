@@ -95,28 +95,27 @@ function moolah_settings_page()
     <h2><?php _e('E-Commerce Store', 'moolah-plugin') ?></h2>
     <?php
 
+    $home = moolah_home();
+    $openUrl = $store ? "http://$home/$store/manage" : "http://$home/1793220937/product/3745794507";
 
+    if ( ! $store ) {
+        $msg    = __('You can create a free Moolah Personal Store by completing the form below.');
 
-    if ( $store ) {
-        $home = moolah_home();
-        $openUrl = "http://$home/$store/manage";
-
-        if ( $open == 'iframe') {
-            $iframeArgs = 'style="overflow:hidden;height:700px;width:100%" height="700px" width="100%"';
-            $openHtml = sprintf('<iframe src="%s" %s></iframe>',$openUrl,$iframeArgs);
-        } else {
-            $openJs = "window.open('$openUrl','new_window'); return false";
-            $openClass = 'button button-primary button-hero';
-            $openStyle = 'display:block; text-align:center; height:40px; width:240px; margin-left: 100px;';
-            $openText = __('Open Management Panel');
-            $openHtml = sprintf('<p><a href="#" onclick="%s" class="%s" style="%s">%s</a></p>',$openJs,$openClass,$openStyle,$openText);
-        }
-
-        echo $openHtml;
-
-    } else {
-        echo "<br/>";
+        echo '<p>'.$msg.'</p>';
     }
+
+    if ( $open == 'window') {
+        $openJs = "window.open('$openUrl','new_window'); return false";
+        $openClass = 'button button-primary button-hero';
+        $openStyle = 'display:block; text-align:center; height:40px; width:240px; margin-left: 100px;';
+        $openText = __('Open Management Panel');
+        $openHtml = sprintf('<p><a href="#" onclick="%s" class="%s" style="%s">%s</a></p>',$openJs,$openClass,$openStyle,$openText);
+    } else {
+        $iframeArgs = 'style="overflow:auto;height:700px;width:100%" height="700px" width="100%"';
+        $openHtml = sprintf('<iframe src="%s" %s></iframe>',$openUrl,$iframeArgs);
+    }
+
+    echo $openHtml;
 
     if ( ! $store ) {
         //$store = 2642953450;
