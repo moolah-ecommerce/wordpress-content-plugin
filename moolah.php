@@ -20,7 +20,7 @@ add_action('save_post', 'moolah_save_meta_box');
 // Action hook to create the post products shortcode
 add_shortcode('moolah', 'moolah_post');
 
-add_filter ('the_content', 'moolah_page');
+//add_filter ('the_content', 'moolah_page');
 
 // Require the administrative file if we're an admin
 if ( is_admin() ) {
@@ -118,12 +118,14 @@ function moolah_embed($content, $atts)
     $script = sprintf('<script type="text/javascript" src="%s" ></script>',$url);
     $return = sprintf("\n%s\n<div id=\"%s\"></div>\n", $script, $target);
 
+    add_action('wp_enqueue_scripts', 'moolah_enqueue_scripts');
+
     return $content.$return;
 }
 
 
 // Load the style sheet
-add_action('wp_enqueue_scripts', 'moolah_enqueue_scripts');
+
 function moolah_enqueue_scripts()
 {
 	wp_register_style('moolah-style', plugins_url().'/moolah/moolah.css' );
