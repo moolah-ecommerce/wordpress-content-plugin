@@ -118,16 +118,18 @@ function moolah_embed($content, $atts)
     $script = sprintf('<script type="text/javascript" src="%s" ></script>',$url);
     $return = sprintf("\n%s\n<div id=\"%s\"></div>\n", $script, $target);
 
-    add_action('wp_enqueue_scripts', 'moolah_enqueue_scripts');
+    // Why does WP not allow this ?
+    wp_enqueue_style('moolah-style');
 
     return $content.$return;
 }
 
 
 // Load the style sheet
-
-function moolah_enqueue_scripts()
+add_action('wp_head', 'moolah_enqueue_style');
+function moolah_enqueue_style()
 {
-	wp_register_style('moolah-style', plugins_url().'/moolah/moolah.css' );
-	wp_enqueue_style('moolah-style');
+    $dir = 'moolah';
+	wp_register_style('moolah-style',plugins_url($dir).'/moolah.css' );
+    //wp_enqueue_style('moolah-style');
 }
