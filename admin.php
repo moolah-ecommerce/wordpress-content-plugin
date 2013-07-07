@@ -24,7 +24,7 @@ function moolah_menu()
         __('Moolah Settings Page', 'moolah-plugin'),
         __('Moolah', 'moolah-plugin'),
         'administrator',
-        __FILE__,
+        'moolah-ecommerce',
         'moolah_settings_page'
     );
 }
@@ -128,15 +128,15 @@ function moolah_settings_page()
         echo __('In your WordPress post, insert the code <strong>[moolah]</strong> into the post to load your store. In a page, simply check the <strong>Show</strong> checkbox.');
     }
 
+    $hiddenDisplaySource = $source ? null : 'style="display: none"';
     ?>
 
     <form method="post" action="options.php">
         <?php settings_fields('moolah-settings-group'); ?>
-        <table class="form-table moolah-settings" style="width:500px;">
+        <table class="form-table moolah-settings" style="width:400px;">
             <tr>
                 <th><?php echo _('Store ID') ?></th>
                 <th><?php echo _('Management Panel') ?></th>
-                <th><?php echo _('Server to Use') ?></th>
                 <th>&nbsp;</th>
             </tr>
             <tr>
@@ -147,15 +147,11 @@ function moolah_settings_page()
                         <option value="iframe" <?php if ($open == 'iframe') echo 'selected="selected"' ?> ><?php echo __('Current page') ?></option>
                     </select>
                 </td>
-                <td>
-                    <select name="moolah_options[source]" >
-                        <option value="test" <?php if ($source == 'test') echo 'selected="selected"' ?> ><?php echo __('Test Server') ?></option>
-                        <option value="store" <?php if ($source == 'store') echo 'selected="selected"' ?> ><?php echo __('Store Server') ?></option>
-                    </select>
-                </td>
                 <td class="submit"><input type="submit" class="button-primary" value="<?php _e('Save Changes', 'moolah-plugin') ?>"/></td>
             </tr>
         </table>
+        <input <?php echo $hiddenDisplaySource ?> type="text" name="moolah_options[source]" value="<?php echo $source ?>" size="30"/>
+
     </form>
 
 </div>

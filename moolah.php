@@ -19,8 +19,7 @@ add_action('admin_init', 'moolah_register_settings');
 add_action('save_post', 'moolah_save_meta_box');
 // Action hook to create the post products shortcode
 add_shortcode('moolah', 'moolah_post');
-
-//add_filter ('the_content', 'moolah_page');
+add_filter( 'the_content', 'moolah_page' );
 
 // Require the administrative file if we're an admin
 if ( is_admin() ) {
@@ -28,7 +27,7 @@ if ( is_admin() ) {
 }
 
 // Test where should we make our API calls to
-function moolah_home($test=false)
+function moolah_home()
 {
 	static $home;
 
@@ -37,10 +36,10 @@ function moolah_home($test=false)
         $options = get_option('moolah_options');
         $source  = $options['source'];
 
-        if ( $source == 'store' ) {
+        if ( ! $source || $source == 'store' ) {
             $home = 'store.moolah-ecommerce.com';
         } else {
-            $home = (gethostname() == 'Nymph.local') ? 'mec-test' : 'test.moolah-ecommerce.com';
+            $home = $source;
         }
 
 	}
@@ -64,7 +63,7 @@ function moolah_page($content)
 {
     global $post;
 
-    $show = get_post_meta($post->ID, 'moolah_show', 0);
+    $show = get_post_meta($post->ID, 'moolah_show', true);
     if ( ! $show )
     {
         return $content;
@@ -99,7 +98,6 @@ function moolah_embed($content, $atts)
     if ( ! $store )
     {
         $store      = $options['store'];
-        $test       = $options['test'];
     }
 
     // One final check
@@ -108,7 +106,7 @@ function moolah_embed($content, $atts)
     }
 
     // queue up admin ajax and styles
-    $m = 'http://' . moolah_home($test) . '/' . $store;
+    $m = 'http://' . moolah_home() . '/' . $store;
 
     if ( ! $target ) {
         $target     = 'moolah';
