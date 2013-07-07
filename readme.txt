@@ -2,7 +2,7 @@
 Contributors: moolah
 Tags: ecommerce, checkout, products, services, commerce, store
 Requires at least: 3.0
-Tested up to: 3.5.1
+Tested up to: 3.5.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -32,6 +32,11 @@ Upload the Moolah plugin to your blog, activate it, then enter your Moolah Store
 4. Moolah supports all the basic features that you would expect from a professional e-commerce system, such as Taxes and Fees, Coupons and Promotions, Shipping and Delivery, and more.
 
 == Changelog ==
+
+= 2.2.0 =
+
+Simplifying of the configuration panel.
+Improving how a store is loaded into a post.
 
 = 2.1.1 =
 
