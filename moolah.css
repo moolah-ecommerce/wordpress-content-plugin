@@ -1,14 +1,18 @@
-.x-moolah table, .x-moolah tr, .x-moolah td, .x-moolah div {
+.moolah-default-style table, .moolah-default-style tr, .moolah-default-style td, .moolah-default-style div {
 	vertical-align: middle;
 	padding: 0 0 0 0;
 	border: none;
 }
 
-.x-moolah table {
+.moolah-default-style table {
 	width: auto;
 }
 
 .entry-content .moolah-default-style dd {
     line-height: 1em;
     padding-bottom: 0;
+}
+
+.moolah-default-style h1, .moolah-default-style h2, .moolah-default-style h3, .moolah-default-style h4, .moolah-default-style h5, .moolah-default-style h6 {
+    clear: inherit;
 }

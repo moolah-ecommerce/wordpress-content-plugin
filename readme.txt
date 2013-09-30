@@ -2,13 +2,15 @@
 Contributors: moolah
 Tags: ecommerce, checkout, products, services, commerce, store
 Requires at least: 3.0
-Tested up to: 3.6
+Tested up to: 3.6.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Moolah offers an online store for business services.
 
 == Description ==
+
+Moolah lets you sell business services directly from your site.
 
 The Moolah E-Commerce plugin for WordPress will load a Moolah Store into your WordPress Website. The plugin loads your store into the page or post of your choice, from which customers can select a product a product and proceed through the checkout.  Products can be managed from one central location available in the admin area of your site.
 
@@ -22,7 +24,7 @@ Features:
 
 == Installation ==
 
-Upload the Moolah plugin to your blog, activate it, then enter your Moolah Store ID.  Very simple.  You find all the information you need, and more, at http://moolah-ecommerce.com/learn/deploy/49-creating-a-wordpress-commerce-site .
+Upload the Moolah plugin to your blog, activate it, then enter your Moolah Store ID.  Very simple.  You find all the information you need, and more, at http://moolah-ecommerce.com/learn .
 
 == Screenshots ==
 
@@ -32,6 +34,10 @@ Upload the Moolah plugin to your blog, activate it, then enter your Moolah Store
 4. Moolah supports all the basic features that you would expect from a professional e-commerce system, such as Taxes and Fees, Coupons and Promotions, Shipping and Delivery, and more.
 
 == Changelog ==
+
+= 3.0.0 =
+
+Moving the link to the control panel into the main admin menu area.
 
 = 2.2.1 =
 

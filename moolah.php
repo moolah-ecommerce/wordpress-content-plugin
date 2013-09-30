@@ -3,7 +3,7 @@
 /*
  * Plugin Name: Moolah
  * Plugin URI: http://moolah-ecommerce.com
- * Version: 2.2.1
+ * Version: 3.0
  * Description: Moolah E-Commerce
  * Author: Moolah E-Commerce
  * Author Email: dev@moolah-ecommerce.com
@@ -127,7 +127,6 @@ function moolah_embed($content, $atts)
 add_action('wp_head', 'moolah_enqueue_style');
 function moolah_enqueue_style()
 {
-    $dir = 'moolah';
-	wp_register_style('moolah-style',plugins_url($dir).'/moolah.css' );
-    //wp_enqueue_style('moolah-style');
+    $url = plugins_url('moolah-ecommerce');
+	wp_register_style('moolah-style',$url.'/moolah.css' );
 }
