@@ -127,6 +127,6 @@ function moolah_embed($content, $atts)
 add_action('wp_head', 'moolah_enqueue_style');
 function moolah_enqueue_style()
 {
-    $url = plugins_url('moolah-ecommerce');
+    $url = plugins_url('moolah-e-commerce');
 	wp_register_style('moolah-style',$url.'/moolah.css' );
 }

@@ -24,8 +24,7 @@ function moolah_install()
 function moolah_menu()
 {
 
-    $url = plugins_url('moolah-ecommerce');
-    wp_register_style('moolah-style',$url.'/moolah.css' );
+    $url = plugins_url('moolah-e-commerce');
 
     add_menu_page(
         __( "Moolah-ECommerce"),
@@ -33,7 +32,7 @@ function moolah_menu()
         'manage_options',
         'moolah-ecommerce',
         'moolah_manage_page',
-        $url . '/mcom16.png'
+        $url . '/mcom64.png'
     );
 
 
@@ -44,6 +43,9 @@ function moolah_menu()
         'moolah-ecommerce-settings',
         'moolah_settings_page'
     );
+
+
+    wp_enqueue_style('moolah-admin-style',$url.'/admin.css' );
 }
 
 
@@ -184,7 +186,10 @@ function moolah_manage_page()
         $openText = __('Open Management Panel');
         $openHtml = sprintf('<p><a href="#" onclick="%s" class="%s" style="%s">%s</a></p>',$openJs,$openClass,$openStyle,$openText);
     } else {
-        $iframeArgs = 'style="overflow:auto;height:650px;width:100%" height="650px" width="100%"';
+	$height = '610px';
+	$width = '100%';
+        $iframeArgs = 'style="overflow:auto;height:%s;width:%s" height="%s" width="%s"';
+	$iframeArgs = sprintf($iframeArgs,$height,$width,$height,$width);
         $openHtml = sprintf('<iframe src="%s" %s></iframe>',$openUrl,$iframeArgs);
     }
 
