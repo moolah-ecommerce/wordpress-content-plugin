@@ -1,6 +1,6 @@
 === Moolah ===
 Contributors: moolah
-Tags: ecommerce, checkout, products, services, commerce, store
+Tags: ecommerce, store, checkout, products, services, mobile
 Requires at least: 3.0
 Tested up to: 3.6.1
 License: GPLv2 or later
@@ -10,9 +10,9 @@ Moolah offers an online store for business services.
 
 == Description ==
 
-Moolah lets you sell business services directly from your site.
+Moolah lets you sell premium goods and business services directly from your site.
 
-The Moolah E-Commerce plugin for WordPress will load a Moolah Store into your WordPress Website. The plugin loads your store into the page or post of your choice, from which customers can select a product a product and proceed through the checkout.  Products can be managed from one central location available in the admin area of your site.
+The Moolah E-Commerce plugin for WordPress provides a powerful e-commerce store optimized for simple checkout. Simply enter your Store ID, login, and begin selling.  You can also load your store into non-WordPress sites.
 
 Features:
 
@@ -28,10 +28,12 @@ Upload the Moolah plugin to your blog, activate it, then enter your Moolah Store
 
 == Screenshots ==
 
-1. Moolah offers standard checkout features, such as Quantiy, Product Variants, and Multiple Currencies
-2. Category and Product information is loaded dynamically into the page using AJAX.
-3. You can log into the Management Panel from within your site.
-4. Moolah supports all the basic features that you would expect from a professional e-commerce system, such as Taxes and Fees, Coupons and Promotions, Shipping and Delivery, and more.
+1. Moolah offers standard checkout features, such as Quantiy, Product Variants, and Multiple Currencies.
+2. A streamlined checkout leads customers from product selection to checkout and payment without leaving the page.
+3. Product attributes lets you collect information to customize the order according to your business requirements.
+4. Log into the control panel directly from your WordPress website. Moolah supports all the basic features that you would expect from a professional e-commerce system, such as Taxes and Fees, Coupons and Promotions, Shipping and Delivery, and more.
+5. Easily create products using our AJAX Management Console.
+6. Moolah's checkout is mobile-ready, adjusting the layout for smaller devices.
 
 == Changelog ==
 
