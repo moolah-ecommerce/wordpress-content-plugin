@@ -171,13 +171,17 @@ function moolah_manage_page()
     $site   = 'http://moolah-ecommerce.com/sign-up';
 
     $home = moolah_home();
-    $openUrl = $store ? "http://manage.$home/$store/" : "http://$home/1793220937/product/3745794507";
 
     if ( ! $store ) {
         $msg    = __('You can create a free Moolah Personal Store by completing the form below.');
+    	$openUrl = "http://$home/1793220937/product/3745794507";
 
         echo '<p>'.$msg.'</p>';
-    }
+    } else {
+    	$openUrl = preg_match('/store/',$home) 
+			? preg_replace('/store/','manage',"http://$home/$store/")
+			: "http://manage.$home/$store/";
+	}
 
     if ( $open == 'window') {
         $openJs = "window.open('$openUrl','new_window'); return false";
@@ -186,10 +190,10 @@ function moolah_manage_page()
         $openText = __('Open Management Panel');
         $openHtml = sprintf('<p><a href="#" onclick="%s" class="%s" style="%s">%s</a></p>',$openJs,$openClass,$openStyle,$openText);
     } else {
-	$height = '610px';
-	$width = '100%';
+	    $height = '610px';
+	    $width = '100%';
         $iframeArgs = 'style="overflow:auto;height:%s;width:%s" height="%s" width="%s"';
-	$iframeArgs = sprintf($iframeArgs,$height,$width,$height,$width);
+	    $iframeArgs = sprintf($iframeArgs,$height,$width,$height,$width);
         $openHtml = sprintf('<iframe src="%s" %s></iframe>',$openUrl,$iframeArgs);
     }
 

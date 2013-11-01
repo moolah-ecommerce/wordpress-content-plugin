@@ -3,7 +3,7 @@
 /*
  * Plugin Name: Moolah
  * Plugin URI: http://moolah-ecommerce.com
- * Version: 3.0
+ * Version: 3.2.1
  * Description: Moolah E-Commerce
  * Author: Moolah E-Commerce
  * Author Email: dev@moolah-ecommerce.com

@@ -8,6 +8,10 @@
 	width: auto;
 }
 
+body .moolah-default-style fieldset div {
+	line-height: 1.2em;
+}
+
 .entry-content .moolah-default-style dd {
     line-height: 1em;
     padding-bottom: 0;

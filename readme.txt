@@ -37,6 +37,11 @@ Upload the Moolah plugin to your blog, activate it, then enter your Moolah Store
 
 == Changelog ==
 
+= 3.2.1 =
+
+*   Advancing version to match version of Moolah on server
+*   Updating CSS and adding mcom64.png
+
 = 3.0.0 =
 
 Moving the link to the control panel into the main admin menu area.
