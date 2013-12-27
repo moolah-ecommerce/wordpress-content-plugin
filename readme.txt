@@ -1,12 +1,12 @@
 === Moolah ===
 Contributors: moolah
-Tags: ecommerce, store, checkout, products, services, mobile
+Tags: ecommerce, store, checkout, payments
 Requires at least: 3.0
-Tested up to: 3.6.1
+Tested up to: 3.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Moolah offers an online store for business services.
+Moolah offers an easy-to-use single-page checkout for your online business.
 
 == Description ==
 
@@ -24,7 +24,9 @@ Features:
 
 == Installation ==
 
-Upload the Moolah plugin to your blog, activate it, then enter your Moolah Store ID.  Very simple.  You find all the information you need, and more, at http://moolah-ecommerce.com/learn .
+Upload the Moolah plugin to your blog, activate it, then enter your Moolah Store ID.  Very simple.  You find all the information you need, and more, at http://moolah-ecommerce.com/learn/deploy .
+
+Also, you can watch our video tutorial at http://www.youtube.com/watch?v=MUeOhLBhax8 .
 
 == Screenshots ==
 
@@ -36,6 +38,10 @@ Upload the Moolah plugin to your blog, activate it, then enter your Moolah Store
 6. Moolah's checkout is mobile-ready, adjusting the layout for smaller devices.
 
 == Changelog ==
+
+= 3.3 =
+
+*   All connections are over HTTPS by default
 
 = 3.2.1 =
 

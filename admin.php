@@ -105,7 +105,7 @@ function moolah_settings_page()
     $open   = $moolah_options['open'];
     $source = $moolah_options['source'];
 
-    $site   = 'http://moolah-ecommerce.com/sign-up';
+    $site   = 'https://moolah-ecommerce.com/sign-up';
 
     ?>
 <div class="wrap">
@@ -159,7 +159,7 @@ function moolah_manage_page()
     ?>
 <div class="">
 
-    <?
+    <?php
 
     // load our options array
     $moolah_options = get_option('moolah_options');
@@ -168,19 +168,19 @@ function moolah_manage_page()
     $open   = $moolah_options['open'];
     $source = $moolah_options['source'];
 
-    $site   = 'http://moolah-ecommerce.com/sign-up';
+    $site   = 'https://moolah-ecommerce.com/sign-up';
 
     $home = moolah_home();
 
     if ( ! $store ) {
         $msg    = __('You can create a free Moolah Personal Store by completing the form below.');
-    	$openUrl = "http://$home/1793220937/product/3745794507";
+    	$openUrl = "https://$home/1793220937/product/3745794507";
 
         echo '<p>'.$msg.'</p>';
     } else {
     	$openUrl = preg_match('/store/',$home) 
-			? preg_replace('/store/','manage',"http://$home/$store/")
-			: "http://manage.$home/$store/";
+			? preg_replace('/store/','manage',"https://$home/$store/")
+			: "https://manage.$home/$store/";
 	}
 
     if ( $open == 'window') {

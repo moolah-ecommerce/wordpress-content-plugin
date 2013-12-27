@@ -106,7 +106,7 @@ function moolah_embed($content, $atts)
     }
 
     // queue up admin ajax and styles
-    $m = 'http://' . moolah_home() . '/' . $store;
+    $m = 'https://' . moolah_home() . '/' . $store;
 
     if ( ! $target ) {
         $target     = 'moolah';
